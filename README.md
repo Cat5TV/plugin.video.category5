@@ -1,5 +1,5 @@
 # plugin.video.category5
-Category5.TV addon for Kodi (unoffical) - very raw code at this time.
+Category5.TV addon (unoffical) for Kodi - very raw code at this time.
 
 ## Requirements
 
