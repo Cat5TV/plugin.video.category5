@@ -1,9 +1,11 @@
 # plugin.video.category5
 Category5.TV addon (unoffical) for Kodi - very raw code at this time.
 
+Watch all the episodes from Category 5 at your pleasure.
+
 ## Install this script
 
-     install Category5.TV script by:
+     install the Category5.TV script by:
      
       * Downloading the ZIP FILE from this page
         (make sure you put it somewhere you can find it later),
@@ -17,7 +19,7 @@ Category5.TV addon (unoffical) for Kodi - very raw code at this time.
 
 feedparser:
 
-    install this script by:
+    install the feedparser script by:
 
       * Downloading the ZIP FILE from https://github.com/dersphere/script.module.feedparser
         (make sure you put it somewhere you can find it later),
