@@ -3,9 +3,9 @@ Category5.TV addon (unoffical) for Kodi - very raw code at this time.
 
 ## Requirements
 
-   feedparser:
+feedparser:
 
-  install this script by:
+    install this script by:
 
       * Downloading the ZIP FILE from https://github.com/dersphere/script.module.feedparser
         (make sure you put it somewhere you can find it later)
