@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon
+    id="plugin.video.category5"
+    name="Category5.TV"
+    version="1.0.0"
+    provider-name="Nate Chambers">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0" />
+        <import addon="script.module.beautifulsoup" version="3.0.8" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Category5 Add On</summary>
+        <description lang="en">Watch all the shows Category5 has to offer.</description>
+        <disclaimer lang="en">Please visit http://www.category5.tv/ for more information.</disclaimer>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+        <website>http://www.category5.tv</website>
+        <platform>all</platform>
+        <language>en</language>
+    </extension>
+</addon>
