@@ -6,6 +6,7 @@ import urlparse
 import xbmc
 import xbmcgui
 import xbmcplugin
+import os
 import feedparser
 
 
