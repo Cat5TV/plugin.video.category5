@@ -11,6 +11,9 @@ Watch all the episodes from Category 5 at your pleasure. (Live show streaming co
         (make sure you put it somewhere you can find it later),
       * Load Kodi and go to system and find "Add-Ons" on the left hand side,
       * Click "Install from zip file".
+      * Locate the plugin.video.category5-master.zip and press ok.
+
+Category5.TV addon can be found in Videos > Video add-ons.
        
 
 Please visit http://www.category5.tv/
