@@ -10,8 +10,7 @@ Watch all the episodes from Category 5 at your pleasure. (Live show streaming co
       * Downloading the ZIP FILE from this page
         (make sure you put it somewhere you can find it later),
       * Load Kodi and go to system and find "Add-Ons" on the left hand side,
-      * Click "Install from zip file",
-      * Locate the feedparser zip and click the file, then press ok.  
+      * Click "Install from zip file".
        
 
 Please visit http://www.category5.tv/
