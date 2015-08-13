@@ -5,7 +5,7 @@
 """
 
 # import of libraries needed to run Category5.TV video feed
-import sys, urlparse, xbmc, xbmcgui, xbmcplugin, xbmcaddon, urllib, urllib2,cookielib, re
+import sys, os, urlparse, xbmc, xbmcgui, xbmcplugin, xbmcaddon, urllib, urllib2,cookielib, re
 
 base_url = sys.argv[0]
 addon_handle = int(sys.argv[1])
@@ -38,6 +38,7 @@ def addfolders(url, title, image, qual, quality):
     if int(qual) == quality:
         url = build_url({'mode': 'folder', 'foldername': url})
         li = xbmcgui.ListItem(title, iconImage=image)
+        li.setProperty('fanart_image', 'fanart.jpg')
         return xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
     else:
         return
@@ -109,6 +110,10 @@ def feedrss(feedrssurl):
         title = rssnumber + ' - ' + rsstitle
         
         li = xbmcgui.ListItem(title, iconImage=rssthumbnail)
+        li.setInfo('video', { 'title': rsstitle,
+                              'episode': rssnumber,
+                              'plot': rssdescription
+                            })
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=False)
 
 

@@ -1,3 +1,5 @@
+Version 1.0.4:
+- Added fanart and network logo to the plugin.  
 Version 1.0.3:
 - Added quality levels for folders (hd/sd/ld)
 Version 1.0.2:

@@ -2,13 +2,14 @@
 <addon
     id="plugin.video.category5"
     name="Category5.TV"
-    version="1.0.3"
-    provider-name="Nate Chambers">
+    version="1.0.4"
+    provider-name="Nate Chambers (NateUK)">
     <requires>
         <import addon="xbmc.python" version="2.1.0" />
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
+        <provides>audio</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Category5 Add On</summary>
