@@ -1,3 +1,5 @@
+Version 1.0.3:
+- Added quality levels for folders (hd/sd/ld)
 Version 1.0.2:
 - Added dynamic show attaching
 Version 1.0.1:

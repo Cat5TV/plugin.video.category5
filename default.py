@@ -5,7 +5,7 @@
 """
 
 # import of libraries needed to run Category5.TV video feed
-import sys, urlparse, xbmc, xbmcgui, xbmcplugin, urllib, urllib2,cookielib, re
+import sys, urlparse, xbmc, xbmcgui, xbmcplugin, xbmcaddon, urllib, urllib2,cookielib, re
 
 base_url = sys.argv[0]
 addon_handle = int(sys.argv[1])
@@ -23,6 +23,8 @@ mode = args.get('mode', None)
 # sets a value to the addon_handle for kodi
 xbmcplugin.setContent(addon_handle, 'plugin.video.category5')
 
+cat5Settings = xbmcaddon.Addon(id='plugin.video.category5')
+
 
 def build_url(query):
     return base_url + '?' + urllib.urlencode(query)
@@ -32,11 +34,13 @@ def build_url(query):
         Adds folders to Kodi (shows)
 """
 
-def addfolders(url, title, image):
-    url = build_url({'mode': 'folder', 'foldername': url})
-    li = xbmcgui.ListItem(title, iconImage=image)
-    return xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
-
+def addfolders(url, title, image, qual, quality):
+    if int(qual) == quality:
+        url = build_url({'mode': 'folder', 'foldername': url})
+        li = xbmcgui.ListItem(title, iconImage=image)
+        return xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
+    else:
+        return
 
 
 """
@@ -70,13 +74,15 @@ def shows(showurl):
     htmltitle = re.findall(r'<cat5Title>(.*?)</cat5Title>', sourceCode)
     htmlimage = re.findall(r'<cat5Image>(.*?)</cat5Image>', sourceCode)
     htmlfeed = re.findall(r'<cat5Feed>(.*?)</cat5Feed>', sourceCode)
+    htmlqual = re.findall(r'<cat5Quality>(.*?)</cat5Quality>', sourceCode)
 
-    for folderhtml, titlehtml, imagehtml, feedhtml in zip(htmlfolder, htmltitle, htmlimage, htmlfeed):
+    for folderhtml, titlehtml, imagehtml, feedhtml, qualhtml in zip(htmlfolder, htmltitle, htmlimage, htmlfeed, htmlqual):
         cat5Shows[folderhtml] = {
                     'cat5Folder': folderhtml,
                     'cat5Title': titlehtml,
                     'cat5Image': imagehtml,
-                    'cat5Feed': feedhtml
+                    'cat5Feed': feedhtml,
+                    'cat5Quality': qualhtml
         }
 
     return
@@ -114,6 +120,9 @@ def feedrss(feedrssurl):
         Main application
 """
 
+# Gathers the quality setting for the video
+quality = int(cat5Settings.getSetting("video_quality"))
+
 # Gathers all the show folders ready for populating
 shows(cat5ShowURL)
 
@@ -127,7 +136,7 @@ if mode is None:
     
     # loops through each of the shows and displays in a folder format on Kodi
     for cat5Folders, data in cat5Shows.iteritems():
-        addfolders(data['cat5Folder'], data['cat5Title'], data['cat5Image'])
+        addfolders(data['cat5Folder'], data['cat5Title'], data['cat5Image'], data['cat5Quality'], quality)
 
     # closes the display process and instructs Kodi to wait for user input
     xbmcplugin.endOfDirectory(addon_handle)

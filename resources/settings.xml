@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+        <!-- General -->
+        <category label="10000">
+                <!-- Video Quality: High (0) / Low (1) -->
+                <setting id="video_quality"
+                        type="enum"
+                        label="10001"
+                        lvalues="10002|10003|10004"
+                        default="0" />
+
+        </category>
+</settings>
