@@ -1,66 +1,95 @@
 #!/usr/bin/env python
 
-import sys
-import urlparse
-import xbmc
-import xbmcgui
-import xbmcplugin
-import urllib
-import urllib2,cookielib
-import re
+"""
+        Declarations and imports of modules
+"""
+
+# import of libraries needed to run Category5.TV video feed
+import sys, urlparse, xbmc, xbmcgui, xbmcplugin, urllib, urllib2,cookielib, re
 
 base_url = sys.argv[0]
 addon_handle = int(sys.argv[1])
 args = urlparse.parse_qs(sys.argv[2][1:])
-xbmcplugin.setContent(addon_handle, 'plugin.video.category5')
+
+# declares the variable cat5Show to store all the different shows and formats available
 cat5Shows = {}
 
-feedsImage = "http://cdn.zecheriah.com/img/rss/sd/icon-144.jpg"
+# declares the variable cat5ShowURL for show url list
+cat5ShowURL = "http://www.webenguk.com/shows.html"
 
-cat5Shows[0] = {
-    'cat5Folder': "Full Episodes HD",
-    'cat5Title': "Full Episodes HD",
-    'cat5Image': feedsImage,
-    'cat5Feed': "http://rss.cat5.tv/kodi/tech-hd.rss"
-}
+# declares the variable mode to default to display the folders on load
+mode = args.get('mode', None)
 
-cat5Shows[1] = {
-    'cat5Folder': "Full Episodes SD",
-    'cat5Title': "Full Episodes SD",
-    'cat5Image': feedsImage,
-    'cat5Feed': "http://rss.cat5.tv/kodi/tech-sd.rss"
-}
+# sets a value to the addon_handle for kodi
+xbmcplugin.setContent(addon_handle, 'plugin.video.category5')
 
-cat5Shows[2] = {
-    'cat5Folder': "Full Episodes LD",
-    'cat5Title': "Full Episodes LD",
-    'cat5Image': feedsImage,
-    'cat5Feed': "http://rss.cat5.tv/kodi/tech-ld.rss"
-}
 
 def build_url(query):
     return base_url + '?' + urllib.urlencode(query)
 
-mode = args.get('mode', None)
+
+"""
+        Adds folders to Kodi (shows)
+"""
 
 def addfolders(url, title, image):
     url = build_url({'mode': 'folder', 'foldername': url})
     li = xbmcgui.ListItem(title, iconImage=image)
     return xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
 
-def feedrss(feedrssurl):
-    
-    hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+
+
+"""
+        Accesses the feed or website as required and downloads the sourcecode
+"""
+
+def getURL(url):
+    headercode = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
         'Accept-Encoding': 'none',
         'Accept-Language': 'en-US,en;q=0.8',
         'Connection': 'keep-alive'}
     
-    rssurl = urllib2.Request(feedrssurl, headers=hdr)
-    response = urllib2.urlopen(rssurl)
+    openurl = urllib2.Request(url, headers=headercode)
+    response = urllib2.urlopen(openurl)
+    source = response.read()
+
+    return source
+
+
+
+"""
+        Builds the shows list and places it into a dictionary
+"""
+
+def shows(showurl):
+    sourceCode = getURL(showurl)
+
+    htmlfolder = re.findall(r'<cat5Folder>(.*?)</cat5Folder>', sourceCode)
+    htmltitle = re.findall(r'<cat5Title>(.*?)</cat5Title>', sourceCode)
+    htmlimage = re.findall(r'<cat5Image>(.*?)</cat5Image>', sourceCode)
+    htmlfeed = re.findall(r'<cat5Feed>(.*?)</cat5Feed>', sourceCode)
+
+    for folderhtml, titlehtml, imagehtml, feedhtml in zip(htmlfolder, htmltitle, htmlimage, htmlfeed):
+        cat5Shows[folderhtml] = {
+                    'cat5Folder': folderhtml,
+                    'cat5Title': titlehtml,
+                    'cat5Image': imagehtml,
+                    'cat5Feed': feedhtml
+        }
+
+    return
+
+
+
+"""
+        Builds the shows within the folder and display on screen using a list
+"""
+
+def feedrss(feedrssurl):
     
-    sourceCode = response.read()
+    sourceCode = getURL(feedrssurl)
     
     numberrss = re.findall(r'<cat5tv:number>(.*?)</cat5tv:number>', sourceCode)
     titlerss = re.findall(r'<cat5tv:title>(.*?)</cat5tv:title>', sourceCode)
@@ -79,22 +108,45 @@ def feedrss(feedrssurl):
 
     return xbmcplugin.endOfDirectory(addon_handle)
 
+
+
+"""
+        Main application
+"""
+
+# Gathers all the show folders ready for populating
+shows(cat5ShowURL)
+
+# checks mode variable to see which state it is set to
 if mode is None:
+    
+    # live feed for Category5.TV
     url = ''
     li = xbmcgui.ListItem('Live Stream (coming soon)')
     xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
     
+    # loops through each of the shows and displays in a folder format on Kodi
     for cat5Folders, data in cat5Shows.iteritems():
         addfolders(data['cat5Folder'], data['cat5Title'], data['cat5Image'])
 
+    # closes the display process and instructs Kodi to wait for user input
     xbmcplugin.endOfDirectory(addon_handle)
 
 elif mode[0] == 'folder':
+    # selects the folder name the user has chosen
     foldername = args['foldername'][0]
+    
+    # searches the select folder name
     for cat5Folders, data in cat5Shows.iteritems():
+        
+        # checks to see if the folder name exisits at the point of the loop
         if data['cat5Folder'] == foldername:
+            
+            # sends information to be added of each show to be compiled and displayed
             feedrss(data['cat5Feed'])
-
+            
+            # stops the loop
+            break
 
 
 

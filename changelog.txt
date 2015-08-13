@@ -1,4 +1,6 @@
+Version 1.0.2:
+- Added dynamic show attaching
 Version 1.0.1:
--New rss feed added for tech program and removal of feedparser
+- New rss feed added for tech program and removal of feedparser
 Version 1.0.0:
 - Initial code creation
