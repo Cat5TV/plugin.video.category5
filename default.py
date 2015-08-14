@@ -21,7 +21,7 @@ cat5ShowURL = "http://www.webenguk.com/shows.html"
 mode = args.get('mode', None)
 
 # sets a value to the addon_handle for kodi
-xbmcplugin.setContent(addon_handle, 'plugin.video.category5')
+xbmcplugin.setContent(addon_handle, 'movies')
 
 cat5Settings = xbmcaddon.Addon(id='plugin.video.category5')
 
@@ -38,7 +38,6 @@ def addfolders(url, title, image, qual, quality):
     if int(qual) == quality:
         url = build_url({'mode': 'folder', 'foldername': url})
         li = xbmcgui.ListItem(title, iconImage=image)
-        li.setProperty('fanart_image', 'fanart.jpg')
         return xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
     else:
         return
@@ -77,7 +76,8 @@ def shows(showurl):
     htmlfeed = re.findall(r'<cat5Feed>(.*?)</cat5Feed>', sourceCode)
     htmlqual = re.findall(r'<cat5Quality>(.*?)</cat5Quality>', sourceCode)
 
-    for folderhtml, titlehtml, imagehtml, feedhtml, qualhtml in zip(htmlfolder, htmltitle, htmlimage, htmlfeed, htmlqual):
+
+    for folderhtml, titlehtml, imagehtml, feedhtml, qualhtml, in zip(htmlfolder, htmltitle, htmlimage, htmlfeed, htmlqual):
         cat5Shows[folderhtml] = {
                     'cat5Folder': folderhtml,
                     'cat5Title': titlehtml,
@@ -103,8 +103,11 @@ def feedrss(feedrssurl):
     thumbnailrss = re.findall(r'<cat5tv:thumbnail>(.*?)</cat5tv:thumbnail>', sourceCode)
     linksrss = re.findall(r'<link>(.*?).m4v</link>', sourceCode)
     descriptionrss = re.findall(r'<cat5tv:description>(.*?)</cat5tv:description>', sourceCode)
-
-    for rssnumber, rsstitle, rssthumbnail, rsslinks, rssdescription in zip(numberrss, titlerss, thumbnailrss, linksrss, descriptionrss):
+    directorrss = re.findall(r'<media:credit role="director">(.*?)</media:credit>', sourceCode)
+    writerrss = re.findall(r'<author>(.*?)</author>', sourceCode)
+    durationrss = re.findall(r'<itunes:duration>(.*?)</itunes:duration>', sourceCode)
+    
+    for rssnumber, rsstitle, rssthumbnail, rsslinks, rssdescription, rrsdirector, rsswriter, rssduration in zip(numberrss, titlerss, thumbnailrss, linksrss, descriptionrss, directorrss, writerrss, durationrss):
         
         url = rsslinks
         title = rssnumber + ' - ' + rsstitle
@@ -112,7 +115,9 @@ def feedrss(feedrssurl):
         li = xbmcgui.ListItem(title, iconImage=rssthumbnail)
         li.setInfo('video', { 'title': rsstitle,
                               'episode': rssnumber,
-                              'plot': rssdescription
+                              'plot': rssdescription,
+                              'director': rrsdirector,
+                              'writer': rsswriter
                             })
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=False)
 
