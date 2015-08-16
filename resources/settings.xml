@@ -6,7 +6,7 @@
                 <setting id="video_quality"
                         type="enum"
                         label="10001"
-                        lvalues="10002|10003|10004"
+                        lvalues="10002|10003|10004|10005"
                         default="0" />
 
         </category>

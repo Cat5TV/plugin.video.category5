@@ -101,11 +101,13 @@ def feedrss(feedrssurl):
     numberrss = re.findall(r'<cat5tv:number>(.*?)</cat5tv:number>', sourceCode)
     titlerss = re.findall(r'<cat5tv:title>(.*?)</cat5tv:title>', sourceCode)
     thumbnailrss = re.findall(r'<cat5tv:thumbnail>(.*?)</cat5tv:thumbnail>', sourceCode)
-    linksrss = re.findall(r'<link>(.*?).m4v</link>', sourceCode)
     descriptionrss = re.findall(r'<cat5tv:description>(.*?)</cat5tv:description>', sourceCode)
     directorrss = re.findall(r'<media:credit role="director">(.*?)</media:credit>', sourceCode)
     writerrss = re.findall(r'<author>(.*?)</author>', sourceCode)
     durationrss = re.findall(r'<itunes:duration>(.*?)</itunes:duration>', sourceCode)
+    linksrss = re.findall(r'<link>(.*?).m4v</link>', sourceCode)
+    if len(linksrss) <= 0:
+        linksrss = re.findall(r'<link>(.*?).mp3</link>', sourceCode)
     
     for rssnumber, rsstitle, rssthumbnail, rsslinks, rssdescription, rrsdirector, rsswriter, rssduration in zip(numberrss, titlerss, thumbnailrss, linksrss, descriptionrss, directorrss, writerrss, durationrss):
         
