@@ -1,3 +1,5 @@
+Version 1.0.7:
+-View mode changed for default (Media Info)
 Version 1.0.6:
 - Added Fanart to list to show thumbnails within Media view
 - Added more comments to code

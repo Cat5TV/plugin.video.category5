@@ -5,7 +5,7 @@
 """
 
 # import of libraries needed to run Category5.TV video feed
-import sys, os, urlparse, xbmc, xbmcgui, xbmcplugin, xbmcaddon, urllib, urllib2,cookielib, re
+import sys, os, urlparse, xbmc, xbmcgui, xbmcplugin, xbmcaddon, xbmcvfs, urllib, urllib2,cookielib, re, json, time
 
 base_url = sys.argv[0]
 addon_handle = int(sys.argv[1])
@@ -25,6 +25,7 @@ xbmcplugin.setContent(addon_handle, 'movies')
 
 cat5Settings = xbmcaddon.Addon(id='plugin.video.category5')
 
+addon = xbmcaddon.Addon()
 
 def build_url(query):
     return base_url + '?' + urllib.urlencode(query)
@@ -186,7 +187,8 @@ def feedrss(feedrssurl):
 
     return xbmcplugin.endOfDirectory(addon_handle)
 
-
+def set_view_mode(view_mode_id):
+    xbmc.executebuiltin('Container.SetViewMode(%d)' % int(view_mode_id))
 
 """
         Main application
@@ -202,16 +204,18 @@ shows(cat5ShowURL)
 if mode is None:
     
     # live feed for Category5.TV
-    url = ''
+    url = 'https://mediapanel.siglocero.net/l/?listen.8082.m3u8&proto=rtsp'
     li = xbmcgui.ListItem('Live Stream (coming soon)')
     xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
     
     # loops through each of the shows and displays in a folder format on Kodi
     for cat5Folders, data in cat5Shows.iteritems():
         addfolders(data['cat5Folder'], data['cat5Title'], data['cat5Image'], data['cat5Quality'], quality)
-
+    
     # closes the display process and instructs Kodi to wait for user input
     xbmcplugin.endOfDirectory(addon_handle)
+
+    set_view_mode('500')
 
 elif mode[0] == 'folder':
     # selects the folder name the user has chosen
@@ -225,6 +229,6 @@ elif mode[0] == 'folder':
             
             # sends information to be added of each show to be compiled and displayed
             feedrss(data['cat5Feed'])
-            
+            set_view_mode('504')
             # stops the loop
             break
