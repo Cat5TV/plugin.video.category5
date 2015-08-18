@@ -204,8 +204,8 @@ shows(cat5ShowURL)
 if mode is None:
     
     # live feed for Category5.TV
-    url = 'https://mediapanel.siglocero.net/l/?listen.8082.m3u8&proto=rtsp'
-    li = xbmcgui.ListItem('Live Stream (coming soon)')
+    url = 'rtsp://mediapanel.siglocero.net/8082/8082'
+    li = xbmcgui.ListItem('Live Stream - image to come soon')
     xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
     
     # loops through each of the shows and displays in a folder format on Kodi
