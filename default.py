@@ -83,9 +83,11 @@ def getURL(url):
     # reads all the sourcecode of the webpage
     source = response.read()
 
+    # removes all new lines or character returns from the source code
+    source = source.replace('\n', ' ').replace('\r', '')
+
     # returns the source code
     return source
-
 
 
 """
@@ -126,7 +128,6 @@ def shows(showurl):
     return
 
 
-
 """
         Builds the shows within the folder and display on screen using a list
 """
@@ -135,27 +136,30 @@ def feedrss(feedrssurl):
     
     # requests the sourcecode for a webpage
     sourceCode = getURL(feedrssurl)
-    
+
     # searches the sourcecode and gets anything between the cat5tv:number tags and places it into the variable numberrss
     numberrss = re.findall(r'<cat5tv:number>(.*?)</cat5tv:number>', sourceCode)
-    
+
     # searches the sourcecode and gets anything between the cat5tv:title tags and places it into the variable titlerss
     titlerss = re.findall(r'<cat5tv:title>(.*?)</cat5tv:title>', sourceCode)
     
-    # searches the sourcecode and gets anything between the cat5tv:thumbnail tags and places it into the variable thumbnailrss
-    thumbnailrss = re.findall(r'<cat5tv:thumbnail>(.*?)</cat5tv:thumbnail>', sourceCode)
+    # searches the sourcecode and gets anything between the cat5tv:year tags and places it into the variable yearrss
+    yearrss = re.findall(r'<cat5tv:year>(.*?)</cat5tv:year>', sourceCode)
+    
+    # searches the sourcecode and gets anything between the cat5tv:genre tags and places it into the variable genrerss
+    genrerss = re.findall(r'<cat5tv:genre>(.*?)</cat5tv:genre>', sourceCode)
     
     # searches the sourcecode and gets anything between the cat5tv:description tags and places it into the variable descriptionrss
     descriptionrss = re.findall(r'<cat5tv:description>(.*?)</cat5tv:description>', sourceCode)
+    
+    # searches the sourcecode and gets anything between the cat5tv:thumbnail tags and places it into the variable thumbnailrss
+    thumbnailrss = re.findall(r'<cat5tv:thumbnail>(.*?)</cat5tv:thumbnail>', sourceCode)
     
     # searches the sourcecode and gets anything between the media:credit role="director" tags and places it into the variable directorrss
     directorrss = re.findall(r'<media:credit role="director">(.*?)</media:credit>', sourceCode)
     
     # searches the sourcecode and gets anything between the author tags and places it into the variable writerrss
     writerrss = re.findall(r'<author>(.*?)</author>', sourceCode)
-    
-    # searches the sourcecode and gets anything between the itunes:duration tags and places it into the variable durationrss
-    durationrss = re.findall(r'<itunes:duration>(.*?)</itunes:duration>', sourceCode)
 
     # searches the sourcecode and gets anything between the link tags and places it into the variable linksrss (m4v)
     linksrss = re.findall(r'<link>(.*?).m4v</link>', sourceCode)
@@ -165,20 +169,22 @@ def feedrss(feedrssurl):
         
         # searches the sourcecode and gets anything between the link tags and places it into the variable linksrss (mp3)
         linksrss = re.findall(r'<link>(.*?).mp3</link>', sourceCode)
-    
-    # loops through all data found from numberrss, titlerss, thumbnailrss, descriptionrss, directorrss, writerrss, durationrss, linksrss and adds information to list item
-    for rssnumber, rsstitle, rssthumbnail, rsslinks, rssdescription, rrsdirector, rsswriter, rssduration in zip(numberrss, titlerss, thumbnailrss, linksrss, descriptionrss, directorrss, writerrss, durationrss):
+
+    # loops through all data found from numberrss, titlerss, thumbnailrss and adds information to list item
+    for rssnumber, rsstitle, rssyear, rssgenre, rssdescription, rssdirector, rssthumbnail, rsslinks, rsswriter in zip(numberrss, titlerss, yearrss, genrerss, descriptionrss, directorrss, thumbnailrss, linksrss, writerrss):
         
         url = rsslinks
         title = rssnumber + ' - ' + rsstitle
         
         li = xbmcgui.ListItem(title, iconImage=rssthumbnail)
-        li.setInfo('video', { 'title': rsstitle,
-                              'episode': rssnumber,
-                              'plot': rssdescription,
-                              'director': rrsdirector,
-                              'writer': rsswriter
-                            })
+        li.setInfo('video', {'episode': rssnumber,
+                             'title': rsstitle,
+                             'year': rssyear,
+                             'genre': rssgenre,
+                             'plot': rssdescription,
+                             'director': rssdirector,
+                             'writer': rsswriter
+                })
 
         li.setThumbnailImage(rssthumbnail)
         li.setProperty('fanart_image', rssthumbnail)
