@@ -83,9 +83,6 @@ def getURL(url):
     # reads all the sourcecode of the webpage
     source = response.read()
 
-    # removes all new lines or character returns from the source code
-    source = source.replace('\n', ' ').replace('\r', '')
-
     # returns the source code
     return source
 
@@ -137,6 +134,9 @@ def feedrss(feedrssurl):
     # requests the sourcecode for a webpage
     sourceCode = getURL(feedrssurl)
 
+    # removes all new lines or character returns from the source code
+    sourceCode1 = sourceCode.replace('\n', ' ').replace('\r', '')
+
     # searches the sourcecode and gets anything between the cat5tv:number tags and places it into the variable numberrss
     numberrss = re.findall(r'<cat5tv:number>(.*?)</cat5tv:number>', sourceCode)
 
@@ -150,7 +150,7 @@ def feedrss(feedrssurl):
     genrerss = re.findall(r'<cat5tv:genre>(.*?)</cat5tv:genre>', sourceCode)
     
     # searches the sourcecode and gets anything between the cat5tv:description tags and places it into the variable descriptionrss
-    descriptionrss = re.findall(r'<cat5tv:description>(.*?)</cat5tv:description>', sourceCode)
+    descriptionrss = re.findall(r'<cat5tv:description>(.*?)</cat5tv:description>', sourceCode1)
     
     # searches the sourcecode and gets anything between the cat5tv:thumbnail tags and places it into the variable thumbnailrss
     thumbnailrss = re.findall(r'<cat5tv:thumbnail>(.*?)</cat5tv:thumbnail>', sourceCode)
