@@ -234,6 +234,8 @@ quality = int(cat5Settings.getSetting("video_quality"))
 # Gathers all the show folders ready for populating
 shows(cat5ShowURL)
 
+liveshows(cat5ShowURL)
+
 # checks mode variable to see which state it is set to
 if mode is None:
     
