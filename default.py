@@ -14,6 +14,8 @@ args = urlparse.parse_qs(sys.argv[2][1:])
 # declares the variable cat5Show to store all the different shows and formats available
 cat5Shows = {}
 
+cat5Live = {}
+
 # declares the variable cat5ShowURL for show url list
 cat5ShowURL = "http://www.webenguk.com/shows.html"
 
@@ -124,6 +126,32 @@ def shows(showurl):
     # returns back to the running code
     return
 
+def liveshows(showurl):
+    
+    # requests the sourcecode for a webpage
+    sourceCode = getURL(showurl)
+    
+    # searches the sourcecode and gets anything between the cat5Title tags and places it into the variable htmltitle
+    livetitle = re.findall(r'<liveTitle>(.*?)</liveTitle>', sourceCode)
+
+    
+    # searches the sourcecode and gets anything between the cat5Image tags and places it into the variable htmlimage
+    liveimage = re.findall(r'<liveImage>(.*?)</liveImage>', sourceCode)
+
+    
+    # searches the sourcecode and gets anything between the cat5Feed tags and places it into the variable htmlfeed
+    livefeed = re.findall(r'<liveFeed>(.*?)</liveFeed>', sourceCode)
+    
+    # loops through all data found from htmlfolder, htmltitle, htmltitle, htmlfeed, htmlqual and adds information to variable (dirctory) cat5Shows
+    for titlelive, imagelive, feedlive in zip(livetitle, liveimage, livefeed):
+        cat5Live[titlelive] = {
+            'cat5Title': titlelive,
+            'cat5Image': imagelive,
+            'cat5Feed': feedlive
+    }
+
+    # returns back to the running code
+    return
 
 """
         Builds the shows within the folder and display on screen using a list
@@ -210,9 +238,10 @@ shows(cat5ShowURL)
 if mode is None:
     
     # live feed for Category5.TV
-    url = 'rtsp://mediapanel.siglocero.net/8082/8082'
-    li = xbmcgui.ListItem('Live Stream - image to come soon')
-    xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+    for cat5Titles, data in cat5Live.iteritems():
+        url = data['cat5Feed']
+        li = xbmcgui.ListItem(data['cat5Title'], iconImage=data['cat5Image'])
+        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
     
     # loops through each of the shows and displays in a folder format on Kodi
     for cat5Folders, data in cat5Shows.iteritems():
