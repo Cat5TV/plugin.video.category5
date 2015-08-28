@@ -17,3 +17,9 @@ Category5.TV addon can be found in Videos > Video add-ons.
        
 
 Please visit http://www.category5.tv/
+
+## Screenshots
+
+Main menu of Category5 - All shows listed including Live stream:
+
+![Main menu of Category5 - All shows listed including Live stream](resources/media/screenshots/mainscreen.png?raw=true)
