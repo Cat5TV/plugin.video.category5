@@ -28,7 +28,7 @@ Development version: https://github.com/nateuk
 
 ## Screenshots
 
-+Main menu of Category5 - All shows listed (including Live stream):
+Main menu of Category5 - All shows listed (including Live stream):
  
 ![Main menu of Category5 - All shows listed including Live stream](resources/media/screenshots/mainscreen.png?raw=true)
 
