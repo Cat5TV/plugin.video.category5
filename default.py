@@ -14,6 +14,7 @@ args = urlparse.parse_qs(sys.argv[2][1:])
 # declares the variable cat5Show to store all the different shows and formats available
 cat5Shows = {}
 
+# declares the variable cat5Live to store all the different live shows and formats available
 cat5Live = {}
 
 # declares the variable cat5ShowURL for show url list
@@ -126,23 +127,28 @@ def shows(showurl):
     # returns back to the running code
     return
 
+"""
+    Builds the live shows within the folder and display on screen using a list
+    
+"""
+
 def liveshows(showurl):
     
     # requests the sourcecode for a webpage
     sourceCode = getURL(showurl)
     
-    # searches the sourcecode and gets anything between the cat5Title tags and places it into the variable htmltitle
+    # searches the sourcecode and gets anything between the livetitle tags and places it into the variable livetitle
     livetitle = re.findall(r'<liveTitle>(.*?)</liveTitle>', sourceCode)
 
     
-    # searches the sourcecode and gets anything between the cat5Image tags and places it into the variable htmlimage
+    # searches the sourcecode and gets anything between the liveImage tags and places it into the variable liveimage
     liveimage = re.findall(r'<liveImage>(.*?)</liveImage>', sourceCode)
 
     
-    # searches the sourcecode and gets anything between the cat5Feed tags and places it into the variable htmlfeed
+    # searches the sourcecode and gets anything between the liveFeed tags and places it into the variable livefeed
     livefeed = re.findall(r'<liveFeed>(.*?)</liveFeed>', sourceCode)
     
-    # loops through all data found from htmlfolder, htmltitle, htmltitle, htmlfeed, htmlqual and adds information to variable (dirctory) cat5Shows
+    # loops through all data found from livetitle, liveimage, livefeed and adds information to variable (dirctory) cat5Shows
     for titlelive, imagelive, feedlive in zip(livetitle, liveimage, livefeed):
         cat5Live[titlelive] = {
             'cat5Title': titlelive,
