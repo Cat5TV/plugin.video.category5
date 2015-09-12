@@ -18,7 +18,10 @@ Category5.TV addon can be found in Videos > Video add-ons.
 
 Please visit http://www.category5.tv/
 
+Last updated : 12th September 2015
+
 ## Versions
 
 Stable version : https://github.com/Cat5TV
+
 Development version: https://github.com/nateuk
