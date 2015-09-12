@@ -1,7 +1,7 @@
 # plugin.video.category5
-Category5.TV addon for Kodi - very raw code at this time.
+Category5.TV addon Offical Development for Kodi.
 
-Watch all the episodes from Category 5 at your pleasure on Kodi.
+Watch all the episodes from Category 5 at your pleasure. (Live show streaming coming soon)
 
 ## Install this script
 
@@ -18,13 +18,7 @@ Category5.TV addon can be found in Videos > Video add-ons.
 
 Please visit http://www.category5.tv/
 
-## Screenshots
+## Versions
 
-Main menu of Category5 - All shows listed (including Live stream):
-
-![Main menu of Category5 - All shows listed including Live stream](resources/media/screenshots/mainscreen.png?raw=true)
-
-A show listings for Category5:
-
-![A show listings for Category5](resources/media/screenshots/mediaview.png?raw=true)
-
+Stable version : https://github.com/Cat5TV
+Development version: https://github.com/nateuk
