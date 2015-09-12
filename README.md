@@ -25,3 +25,14 @@ Last updated : 12th September 2015
 Stable version : https://github.com/Cat5TV
 
 Development version: https://github.com/nateuk
+
+## Screenshots
+
++Main menu of Category5 - All shows listed (including Live stream):
+ 
+![Main menu of Category5 - All shows listed including Live stream](resources/media/screenshots/mainscreen.png?raw=true)
+
+A show listings for Category5:
+
+![A show listings for Category5](resources/media/screenshots/mediaview.png?raw=true)
+
