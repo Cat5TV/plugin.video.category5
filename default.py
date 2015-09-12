@@ -18,7 +18,7 @@ cat5Shows = {}
 cat5Live = {}
 
 # declares the variable cat5ShowURL for show url list
-cat5ShowURL = "http://www.webenguk.com/shows.html"
+cat5ShowURL = "http://rss.cat5.tv/kodi/shows.html"
 
 # declares the variable mode to default to display the folders on load
 mode = args.get('mode', None)
