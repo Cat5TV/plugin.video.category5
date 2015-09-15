@@ -3,7 +3,7 @@
     id="plugin.video.category5"
     name="Category5.TV"
     version="1.0.12"
-    provider-name="Nate Chambers (NateUK)">
+    provider-name="Category5 TV Network">
     <requires>
         <import addon="xbmc.python" version="2.1.0" />
     </requires>
@@ -13,11 +13,11 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Category5 Add On</summary>
-        <description lang="en">Watch shows from the Category5.TV this includes Technology TV.</description>
+        <description lang="en">Watch shows from the Category5 TV Network, including Category5 Technology TV.</description>
         <disclaimer lang="en">Please visit http://www.category5.tv/ for more information.</disclaimer>
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
         <website>http://www.category5.tv</website>
-        <source>https://github.com/nateuk/plugin.video.category5</source>
+        <source>https://github.com/Cat5TV/plugin.video.category5</source>
         <platform>all</platform>
         <language>en</language>
     </extension>
