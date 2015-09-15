@@ -1,3 +1,6 @@
+Version 1.0.13:
+-Sort added to shows
+-Added Seasons
 Version 1.0.12:
 -Code tidy
 -Changed location of shows.html
