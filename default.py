@@ -5,7 +5,8 @@
 """
 
 # import of libraries needed to run Category5.TV video feed
-import sys, os, urlparse, xbmc, xbmcgui, xbmcplugin, xbmcaddon, xbmcvfs, urllib, urllib2,cookielib, re, json, time
+import sys, os, urlparse, xbmc, xbmcgui, xbmcplugin, xbmcaddon, xbmcvfs, urllib, urllib2, cookielib, re, json, time
+import datetime, string, zlib, HTMLParser, httplib
 
 base_url = sys.argv[0]
 addon_handle = int(sys.argv[1])
@@ -20,16 +21,17 @@ cat5Live = {}
 # declares the variable cat5ShowURL for show url list
 cat5ShowURL = "http://rss.cat5.tv/kodi/shows.html"
 
-# declares the variable mode to default to display the folders on load
-mode = args.get('mode', None)
-
 # sets a value to the addon_handle for kodi
 xbmcplugin.setContent(addon_handle, 'movies')
 
 cat5Settings = xbmcaddon.Addon(id='plugin.video.category5')
 
+# declares the variable addon for the category5 plugin
 addon = xbmcaddon.Addon()
 
+"""
+        Adds folder URL configurations and links
+"""
 def build_url(query):
     return base_url + '?' + urllib.urlencode(query)
 
@@ -38,13 +40,13 @@ def build_url(query):
         Adds folders to Kodi (shows)
 """
 
-def addfolders(url, title, image, qual, quality):
+def addfolders(url, title, image, qual, quality, modes):
     
     # Checks the quality setting for the user and matches the correct shows to it
     if int(qual) == quality:
         
         # builds the url(internal only) for kodi to be able to call
-        url = build_url({'mode': 'folder', 'foldername': url})
+        url = build_url({'mode': modes, 'foldername': url, 'title': title})
         
         # adds a list item to include the folder image and title
         li = xbmcgui.ListItem(title, iconImage=image)
@@ -163,10 +165,10 @@ def liveshows(showurl):
         Builds the shows within the folder and display on screen using a list
 """
 
-def feedrss(feedrssurl):
+def feedrss(sourceCode, seasons):
     
-    # requests the sourcecode for a webpage
-    sourceCode = getURL(feedrssurl)
+    xbmcplugin.setContent(int(sys.argv[1]), 'shows')
+    xbmcplugin.addSortMethod(int(sys.argv[1]),xbmcplugin.SORT_METHOD_EPISODE)
 
     # removes all new lines or character returns from the source code
     sourceCode1 = sourceCode.replace('\n', ' ').replace('\r', '')
@@ -193,6 +195,9 @@ def feedrss(feedrssurl):
     directorrss = re.findall(r'<media:credit role="director">(.*?)</media:credit>', sourceCode)
     
     # searches the sourcecode and gets anything between the author tags and places it into the variable writerrss
+    sessonrss = re.findall(r'<cat5tv:season>(.*?)</cat5tv:season>', sourceCode)
+
+    # searches the sourcecode and gets anything between the author tags and places it into the variable writerrss
     writerrss = re.findall(r'<author>(.*?)</author>', sourceCode)
 
     # searches the sourcecode and gets anything between the link tags and places it into the variable linksrss (m4v)
@@ -205,30 +210,55 @@ def feedrss(feedrssurl):
         linksrss = re.findall(r'<link>(.*?).mp3</link>', sourceCode)
 
     # loops through all data found from numberrss, titlerss, thumbnailrss and adds information to list item
-    for rssnumber, rsstitle, rssyear, rssgenre, rssdescription, rssdirector, rssthumbnail, rsslinks, rsswriter in zip(numberrss, titlerss, yearrss, genrerss, descriptionrss, directorrss, thumbnailrss, linksrss, writerrss):
+    for rssnumber, rsstitle, rssyear, rssgenre, rssdescription, rssdirector, rssthumbnail, rsslinks, rsswriter, rssseason in zip(numberrss, titlerss, yearrss, genrerss, descriptionrss, directorrss, thumbnailrss, linksrss, writerrss, sessonrss):
         
-        url = rsslinks
-        title = rssnumber + ' - ' + rsstitle
+        if rssseason == seasons:
+            url = rsslinks
+            title = rssnumber + ' - ' + rsstitle
         
-        li = xbmcgui.ListItem(title, iconImage=rssthumbnail)
-        li.setInfo('video', {'episode': rssnumber,
-                             'title': rsstitle,
-                             'year': rssyear,
-                             'genre': rssgenre,
-                             'plot': rssdescription,
-                             'director': rssdirector,
-                             'writer': rsswriter
-                })
+            li = xbmcgui.ListItem(title, iconImage=rssthumbnail)
+            li.setInfo('video', {'episode': rssnumber,
+                                'title': rsstitle,
+                                'year': rssyear,
+                                'genre': rssgenre,
+                                'plot': rssdescription,
+                                'director': rssdirector,
+                                'writer': rsswriter
+                       })
 
-        li.setThumbnailImage(rssthumbnail)
-        li.setProperty('fanart_image', rssthumbnail)
-        xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=False)
+            li.setThumbnailImage(rssthumbnail)
+            li.setProperty('fanart_image', rssthumbnail)
+            xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=False)
 
 
-    return xbmcplugin.endOfDirectory(addon_handle)
+    return xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+"""
+    Builds the shows within the folder and display on screen using a list
+"""
+
+def seasonrss(sourceCode):
+    
+    # searches the sourcecode and gets anything between the cat5tv:season tags and places it into the variable seasonheader
+    seasonheader = re.findall(r'<cat5tv:season>(.*?)</cat5tv:season>', sourceCode)
+    
+    seasons = seasonheader[0]
+
+    return seasons
 
 def set_view_mode(view_mode_id):
     xbmc.executebuiltin('Container.SetViewMode(%d)' % int(view_mode_id))
+
+def getLastEpisodeImage(sourceCode, season):
+    thumbnailrss = re.findall(r'<cat5tv:thumbnail>(.*?)</cat5tv:thumbnail>', sourceCode)
+    seasonrss = re.findall(r'<cat5tv:season>(.*?)</cat5tv:season>', sourceCode)
+    
+    for rssthumbnail, rssseason in zip(thumbnailrss, seasonrss):
+        
+        if rssseason == season:
+            return rssthumbnail
+            break
+
 
 """
         Main application
@@ -242,8 +272,26 @@ shows(cat5ShowURL)
 
 liveshows(cat5ShowURL)
 
+
+parms = {}
+try:
+    parms = dict( arg.split( "=" ) for arg in ((sys.argv[2][1:]).split( "&" )) )
+    for key in parms:
+        try:    parms[key] = urllib.unquote_plus(parms[key]).decode(UTF8)
+        except: pass
+except:
+    parms = {}
+
+p = parms.get
+
+mode = p('mode',None)
+
+
 # checks mode variable to see which state it is set to
-if mode is None:
+if mode == None:
+    
+    xbmcplugin.setContent(int(sys.argv[1]), 'shows')
+    xbmcplugin.addSortMethod(int(sys.argv[1]),xbmcplugin.SORT_METHOD_EPISODE)
     
     # live feed for Category5.TV
     for cat5Titles, data in cat5Live.iteritems():
@@ -253,25 +301,49 @@ if mode is None:
     
     # loops through each of the shows and displays in a folder format on Kodi
     for cat5Folders, data in cat5Shows.iteritems():
-        addfolders(data['cat5Folder'], data['cat5Title'], data['cat5Image'], data['cat5Quality'], quality)
+        addfolders(data['cat5Folder'], data['cat5Title'], data['cat5Image'], data['cat5Quality'], quality, 'GS')
     
     # closes the display process and instructs Kodi to wait for user input
-    xbmcplugin.endOfDirectory(addon_handle)
+    xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
     set_view_mode('500')
 
-elif mode[0] == 'folder':
+elif mode == 'FS':
     # selects the folder name the user has chosen
     foldername = args['foldername'][0]
+    # selects the Season the user has chosen
+    titleTemp = args['title'][0]
+    
+    # gathers the numbers within the title "Season"
+    titleTemp = re.findall('\d+', titleTemp)
+    
+    # sets the title varibale to the number of the season
+    title = titleTemp[0]
     
     # searches the select folder name
     for cat5Folders, data in cat5Shows.iteritems():
         
         # checks to see if the folder name exisits at the point of the loop
         if data['cat5Folder'] == foldername:
-            
-            # sends information to be added of each show to be compiled and displayed
-            feedrss(data['cat5Feed'])
+            sourcecode = getURL(data['cat5Feed'])
+            feedrss(sourcecode, title)
             set_view_mode('504')
-            # stops the loop
             break
+
+elif mode == 'GS':
+    # selects the folder name the user has chosen
+    foldername = args['foldername'][0]
+    
+    # searches the select folder name
+    for cat5Folders, data in cat5Shows.iteritems():
+        if data['cat5Folder'] == foldername:
+            sourcecode = getURL(data['cat5Feed'])
+            seasons = seasonrss(sourcecode)
+            xbmcplugin.setContent(int(sys.argv[1]), 'shows')
+            xbmcplugin.addSortMethod(int(sys.argv[1]),xbmcplugin.SORT_METHOD_EPISODE)
+            for x in range (int(seasons), 0, -1):
+                addfolders(data['cat5Folder'], "Season %s" % str(x), getLastEpisodeImage(sourcecode, str(x)), data['cat5Quality'], quality, 'FS')
+            set_view_mode('500')
+            xbmcplugin.endOfDirectory(int(sys.argv[1]))
+            break
+
