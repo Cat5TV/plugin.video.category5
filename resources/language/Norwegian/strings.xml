@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+
+  <!-- Settings -->
+  <string id="10000">Generell</string>
+  <string id="10001">Kvalitet</string>
+  <string id="10002">Høy</string>
+  <string id="10003">Standard</string>
+  <string id="10004">Lav</string>
+  <string id="10005">Kun lyd</string>
+
+</strings>
