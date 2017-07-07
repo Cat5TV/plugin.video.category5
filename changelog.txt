@@ -1,3 +1,5 @@
+Version 1.0.14:
+-Added HLS ("Auto") playback mode
 Version 1.0.13:
 -Sort added to shows
 -Added Seasons
