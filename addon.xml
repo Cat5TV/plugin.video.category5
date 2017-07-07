@@ -2,7 +2,7 @@
 <addon
     id="plugin.video.category5"
     name="Category5.TV"
-    version="1.0.12"
+    version="1.0.13"
     provider-name="Category5 TV Network">
     <requires>
         <import addon="xbmc.python" version="2.1.0" />
