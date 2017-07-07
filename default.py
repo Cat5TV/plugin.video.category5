@@ -19,7 +19,7 @@ cat5Shows = {}
 cat5Live = {}
 
 # declares the variable cat5ShowURL for show url list
-cat5ShowURL = "http://rss.cat5.tv/kodi/shows.php?" + datetime.strptime('now')
+cat5ShowURL = "http://rss.cat5.tv/kodi/shows.php"
 
 # sets a value to the addon_handle for kodi
 xbmcplugin.setContent(addon_handle, 'movies')
