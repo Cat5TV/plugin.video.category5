@@ -1,6 +1,8 @@
 Version 1.0.14:
 -Added HLS ("Auto") playback mode
 -Added Norwegian translation
+-Added cache busting on server side
+-Added more shows
 Version 1.0.13:
 -Sort added to shows
 -Added Seasons
