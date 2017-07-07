@@ -15,11 +15,11 @@
         <summary lang="en">Category5 Add On</summary>
         <summary lang="no">Category5-tillegg</summary>
         <description lang="en">Watch shows from the Category5 TV Network, including Category5 Technology TV.</description>
-        <disclaimer lang="en">Please visit http://www.category5.tv/ for more information.</disclaimer>
+        <disclaimer lang="en">Please visit https://category5.tv/ for more information.</disclaimer>
         <description lang="no">Se programmer fra Category5 TV-nettverket, inkludert Category5 Technology TV.</description>
-        <disclaimer lang="no">Besøk http://www.category5.tv/ for mer informasjon.</disclaimer>
+        <disclaimer lang="no">Besøk https://category5.tv/ for mer informasjon.</disclaimer>
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-        <website>http://www.category5.tv</website>
+        <website>https://category5.tv</website>
         <source>https://github.com/Cat5TV/plugin.video.category5</source>
         <platform>all</platform>
         <language>no en</language>
