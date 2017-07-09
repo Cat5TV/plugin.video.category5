@@ -7,7 +7,7 @@
                         type="enum"
                         label="10001"
                         lvalues="10002|10003|10004|10005|10006"
-                        default="4" />
+                        default="0" />
 
         </category>
 </settings>
