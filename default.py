@@ -201,7 +201,7 @@ def feedrss(sourceCode, seasons):
     writerrss = re.findall(r'<author>(.*?)</author>', sourceCode)
 
     # searches the sourcecode and gets anything between the link tags and places it into the variable linksrss (m4v)
-    linksrss = re.findall(r'<link>(.*?).m4v</link>', sourceCode)
+    linksrss = re.findall(r'<link>(.*?)</link>', sourceCode)
     
     # checks to make sure linkrss has content for m4v if not check for mp3
     if len(linksrss) <= 0:
