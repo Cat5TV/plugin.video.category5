@@ -97,8 +97,8 @@ def getURL(url):
 """
 
 def shows(showurl):
-    
-    # requests the sourcecode for a webpage
+
+    # load the list of available feeds from the Cat5 backend
     sourceCode = getURL(showurl)
 
     # searches the sourcecode and gets anything between the cat5Folder tags and places it into the variable htmlfolder
@@ -195,7 +195,7 @@ def feedrss(sourceCode, seasons):
     directorrss = re.findall(r'<media:credit role="director">(.*?)</media:credit>', sourceCode)
     
     # searches the sourcecode and gets anything between the author tags and places it into the variable writerrss
-    sessonrss = re.findall(r'<cat5tv:season>(.*?)</cat5tv:season>', sourceCode)
+    seasonrss = re.findall(r'<cat5tv:season>(.*?)</cat5tv:season>', sourceCode)
 
     # searches the sourcecode and gets anything between the author tags and places it into the variable writerrss
     writerrss = re.findall(r'<author>(.*?)</author>', sourceCode)
@@ -210,14 +210,15 @@ def feedrss(sourceCode, seasons):
         linksrss = re.findall(r'<link>(.*?).mp3</link>', sourceCode)
 
     # loops through all data found from numberrss, titlerss, thumbnailrss and adds information to list item
-    for rssnumber, rsstitle, rssyear, rssgenre, rssdescription, rssdirector, rssthumbnail, rsslinks, rsswriter, rssseason in zip(numberrss, titlerss, yearrss, genrerss, descriptionrss, directorrss, thumbnailrss, linksrss, writerrss, sessonrss):
+    for rssnumber, rsstitle, rssyear, rssgenre, rssdescription, rssdirector, rssthumbnail, rsslinks, rsswriter, rssseason in zip(numberrss, titlerss, yearrss, genrerss, descriptionrss, directorrss, thumbnailrss, linksrss, writerrss, seasonrss):
         
         if rssseason == seasons:
             url = rsslinks
-            title = rssnumber + ' - ' + rsstitle
+            rsstitle = rssnumber + ' - ' + rsstitle
         
             li = xbmcgui.ListItem(title, iconImage=rssthumbnail)
-            li.setInfo('video', {'episode': rssnumber,
+            li.setInfo('video', {
+                                #'episode': rssnumber,
                                 'title': rsstitle,
                                 'year': rssyear,
                                 'genre': rssgenre,
@@ -317,7 +318,7 @@ elif mode == 'FS':
     # gathers the numbers within the title "Season"
     titleTemp = re.findall('\d+', titleTemp)
     
-    # sets the title varibale to the number of the season
+    # sets the title variable to the number of the season
     title = titleTemp[0]
     
     # searches the select folder name
@@ -346,4 +347,3 @@ elif mode == 'GS':
             set_view_mode('500')
             xbmcplugin.endOfDirectory(int(sys.argv[1]))
             break
-
