@@ -1,3 +1,10 @@
+Version 1.0.15:
+-Restore HD to default mode until we get HLS stable
+-Minor corrections
+-Fix episode numbers on all feeds
+-Move episode slug out of :number field and create new :slug category (backend)
+-Create backend cachebuster to speed up loading of new episodes due to CDN cache
+-Continue work on HLS (unstable)
 Version 1.0.14:
 -Added HLS ("Auto") playback mode
 -Added Norwegian translation
