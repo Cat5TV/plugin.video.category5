@@ -14,10 +14,21 @@
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Category5 TV Network Kodi Add On</summary>
         <summary lang="no">Category5 TV Network Kodi-tillegg</summary>
+        <summary lang="da">Category5 TV Network Kodi-tillegg</summary>
+        <summary lang="sv">Category5 TV Network Kodi-Tillägg</summary>
+        <summary lang="de">Category5 TV Network Kodi-plugin</summary>
         <description lang="en">Watch shows from the Category5 TV Network, including Category5 Technology TV.</description>
         <disclaimer lang="en">Please visit https://category5.tv/ for more information.</disclaimer>
         <description lang="no">Se programmer fra Category5 TV-nettverket, inkludert Category5 Technology TV.</description>
         <disclaimer lang="no">Besøk https://category5.tv/ for mer informasjon.</disclaimer>
+
+        <description lang="da">Se programmer fra kategori5 net-tv, herunder kategori5 Technology tv.</description>
+	<disclaimer lang="da">Besøg https://category5.tv/ for mere information.</disclaimer>
+        <description lang="sv">Titta på TV-nätverket Category5, inklusive Category5 Technology TV.</description>
+	<disclaimer lang="sv">Besök https://category5.tv/ för mer information.</disclaimer>
+        <description lang="de">Beobachtungen von der Kategorie5 TV-Netzwerk, einschließlich Kategorie 5 Technologie TV.</description>
+	<disclaimer lang="de">Besuchen Sie https://category5.tv/ für weitere Informationen.</disclaimer>
+	
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
         <website>https://category5.tv</website>
         <source>https://github.com/Cat5TV/plugin.video.category5</source>
