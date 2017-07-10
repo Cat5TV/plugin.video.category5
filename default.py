@@ -172,6 +172,9 @@ def feedrss(sourceCode, seasons):
 
     # removes all new lines or character returns from the source code
     sourceCode1 = sourceCode.replace('\n', ' ').replace('\r', '')
+    
+    # Get the video ID
+    idrss = re.findall(r'<cat5tv:id>(.*?)</cat5tv:id>', sourceCode)
 
     # searches the sourcecode and gets anything between the cat5tv:number tags and places it into the variable numberrss
     numberrss = re.findall(r'<cat5tv:number>(.*?)</cat5tv:number>', sourceCode)
@@ -201,16 +204,20 @@ def feedrss(sourceCode, seasons):
     writerrss = re.findall(r'<author>(.*?)</author>', sourceCode)
 
     # searches the sourcecode and gets anything between the link tags and places it into the variable linksrss (m4v)
-    linksrss = re.findall(r'<link>(.*?)</link>', sourceCode)
+    linksrss = re.findall(r'<link>(.*?).m4v</link>', sourceCode)
     
-    # checks to make sure linkrss has content for m4v if not check for mp3
+    # checks to make sure linkrss has content - if not check for mp3
     if len(linksrss) <= 0:
-        
         # searches the sourcecode and gets anything between the link tags and places it into the variable linksrss (mp3)
         linksrss = re.findall(r'<link>(.*?).mp3</link>', sourceCode)
+    
+    # checks to make sure linkrss has content - if not check for m3u8
+    if len(linksrss) <= 0:
+        # searches the sourcecode and gets anything between the link tags and places it into the variable linksrss (m3u8)
+        linksrss = re.findall(r'<link>(.*?).m3u8</link>', sourceCode)
 
     # loops through all data found from numberrss, titlerss, thumbnailrss and adds information to list item
-    for rssnumber, rsstitle, rssyear, rssgenre, rssdescription, rssdirector, rssthumbnail, rsslinks, rsswriter, rssseason in zip(numberrss, titlerss, yearrss, genrerss, descriptionrss, directorrss, thumbnailrss, linksrss, writerrss, seasonrss):
+    for rssid, rssnumber, rsstitle, rssyear, rssgenre, rssdescription, rssdirector, rssthumbnail, rsslinks, rsswriter, rssseason in zip(idrss, numberrss, titlerss, yearrss, genrerss, descriptionrss, directorrss, thumbnailrss, linksrss, writerrss, seasonrss):
         
         if rssseason == seasons:
             url = rsslinks
