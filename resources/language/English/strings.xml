@@ -4,10 +4,10 @@
   <!-- Settings -->
   <string id="10000">General</string>
   <string id="10001">Quality</string>
-  <string id="10002">High</string>
-  <string id="10003">Standard</string>
-  <string id="10004">Low</string>
-  <string id="10005">Audio Only</string>
+  <string id="10002">HD</string>
+  <string id="10003">SD</string>
+  <string id="10004">LD</string>
+  <string id="10005">Audio</string>
   <string id="10006">Auto</string>
 
 </strings>
