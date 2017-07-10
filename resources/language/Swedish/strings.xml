@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+
+  <!-- Settings -->
+  <string id="10000">Generell</string>
+  <string id="10001">Kvalitet</string>
+  <string id="10002">HD</string>
+  <string id="10003">SD</string>
+  <string id="10004">LD</string>
+  <string id="10005">Endast ljud</string>
+  <string id="10006">Automatisk</string>
+
+</strings>
