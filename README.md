@@ -1,5 +1,5 @@
 # plugin.video.category5
-Category5.TV addon Offical Development for Kodi (version 1.0.16).
+Category5.TV addon Offical Development for Kodi (version 1.0.17).
 
 Watch all the episodes from the Category5 TV Network at your leisure, as well as the weekly live episodes of Category5 Technology TV.
 
@@ -34,6 +34,10 @@ Original release: https://github.com/nateuk
 Main menu of Category5 - All shows listed (including Live stream):
 
 ![Main menu of Category5 - All shows listed including Live stream](resources/media/screenshots/mainscreen.png?raw=true)
+
+Season listings for Category5 main show:
+
+![Season listings for Category5 main show](resources/media/screenshots/seasons.png?raw=true)
 
 A show listings for Category5:
 
