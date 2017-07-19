@@ -250,9 +250,10 @@ def seasonrss(sourceCode):
     # searches the sourcecode and gets anything between the cat5tv:season tags and places it into the variable seasonheader
     seasonheader = re.findall(r'<cat5tv:season>(.*?)</cat5tv:season>', sourceCode)
     
-    seasons = seasonheader[0]
+    #seasons = seasonheader[0]
 
-    return seasons
+    #return seasons
+    return seasonheader
 
 def set_view_mode(view_mode_id):
     xbmc.executebuiltin('Container.SetViewMode(%d)' % int(view_mode_id))
