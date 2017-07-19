@@ -349,7 +349,8 @@ elif mode == 'GS':
             seasons = seasonrss(sourcecode)
             xbmcplugin.setContent(int(sys.argv[1]), 'shows')
             xbmcplugin.addSortMethod(int(sys.argv[1]),xbmcplugin.SORT_METHOD_EPISODE)
-            for x in range (int(seasons), 0, -1):
+            #for x in range (int(seasons), 0, -1):
+            for x in seasons:
                 addfolders(data['cat5Folder'], "Season %s" % str(x), getLastEpisodeImage(sourcecode, str(x)), data['cat5Quality'], quality, 'FS')
             set_view_mode('500')
             xbmcplugin.endOfDirectory(int(sys.argv[1]))
