@@ -1,9 +1,15 @@
+Version 1.0.18:
+- Make changelog easier to read
+- Don't list empty seasons
+
 Version 1.0.17:
 -Add Swedish, Danish and German translations
+
 Version 1.0.16:
 -HLS should now be working, and is set as default
 -Removed LD ("low") quality option since it is unused
 -Changed quality wording to HD/SD/Audio/Auto
+
 Version 1.0.15:
 -Restore HD to default mode until we get HLS stable
 -Minor corrections
@@ -11,41 +17,56 @@ Version 1.0.15:
 -Move episode slug out of :number field and create new :slug category (backend)
 -Create backend cachebuster to speed up loading of new episodes due to CDN cache
 -Continue work on HLS (unstable)
+
 Version 1.0.14:
 -Added HLS ("Auto") playback mode
 -Added Norwegian translation
 -Added cache busting on server side
 -Added more shows
 -Fixed Nature HD feed (was playing Audio only)
+
 Version 1.0.13:
 -Sort added to shows
 -Added Seasons
+
 Version 1.0.12:
 -Code tidy
 -Changed location of shows.html
+
 Version 1.0.11:
 -Added dynamic Live feed
+
 Version 1.0.10:
 -Fixed First Episode error
+
 Version 1.0.9:
 -Fixed description error on some episodes
 -Added new shows
+
 Version 1.0.8:
 -Live stream added
+
 Version 1.0.7:
 -View mode changed for default (Media Info)
+
 Version 1.0.6:
 - Added Fanart to list to show thumbnails within Media view
 - Added more comments to code
+
 Version 1.0.5:
 - Added Audio capability within video
+
 Version 1.0.4:
 - Added fanart and network logo to the plugin.  
+
 Version 1.0.3:
 - Added quality levels for folders (hd/sd/ld)
+
 Version 1.0.2:
 - Added dynamic show attaching
+
 Version 1.0.1:
 - New rss feed added for tech program and removal of feedparser
+
 Version 1.0.0:
 - Initial code creation
