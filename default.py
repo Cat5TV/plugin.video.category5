@@ -250,11 +250,10 @@ def seasonrss(sourceCode):
     # searches the sourcecode and gets anything between the cat5tv:season tags and places it into the variable seasonheader
     seasonheader = re.findall(r'<cat5tv:season>(.*?)</cat5tv:season>', sourceCode)
     
-    #seasons = seasonheader[0]
+    seasons = seasonheader[0]
 
-    #return seasons
-    return seasonheader
-
+    return seasons
+    
 def set_view_mode(view_mode_id):
     xbmc.executebuiltin('Container.SetViewMode(%d)' % int(view_mode_id))
 
@@ -347,11 +346,10 @@ elif mode == 'GS':
     for cat5Folders, data in cat5Shows.iteritems():
         if data['cat5Folder'] == foldername:
             sourcecode = getURL(data['cat5Feed'])
-            seasons = seasonrss(sourcecode)
+            seasonrss = re.findall(r'<cat5tv:season>(.*?)</cat5tv:season>', sourceCode)
             xbmcplugin.setContent(int(sys.argv[1]), 'shows')
             xbmcplugin.addSortMethod(int(sys.argv[1]),xbmcplugin.SORT_METHOD_EPISODE)
-            #for x in range (int(seasons), 0, -1):
-            for x in seasons:
+            for x in seasonrss:
                 addfolders(data['cat5Folder'], "Season %s" % str(x), getLastEpisodeImage(sourcecode, str(x)), data['cat5Quality'], quality, 'FS')
             set_view_mode('500')
             xbmcplugin.endOfDirectory(int(sys.argv[1]))
