@@ -246,14 +246,9 @@ def feedrss(sourceCode, seasons):
 """
 
 def seasonrss(sourceCode):
+    seasons = re.findall(r'<cat5tv:season>(.*?)</cat5tv:season>', sourceCode)
+    return sorted(set(seasons), key=seasons.index)
     
-    # searches the sourcecode and gets anything between the cat5tv:season tags and places it into the variable seasonheader
-    seasonheader = re.findall(r'<cat5tv:season>(.*?)</cat5tv:season>', sourceCode)
-    
-    seasons = seasonheader[0]
-
-    return seasons
-
 def set_view_mode(view_mode_id):
     xbmc.executebuiltin('Container.SetViewMode(%d)' % int(view_mode_id))
 
@@ -331,10 +326,10 @@ elif mode == 'FS':
     # searches the select folder name
     for cat5Folders, data in cat5Shows.iteritems():
         
-        # checks to see if the folder name exisits at the point of the loop
+        # checks to see if the folder name exists at the point of the loop
         if data['cat5Folder'] == foldername:
-            sourcecode = getURL(data['cat5Feed'])
-            feedrss(sourcecode, title)
+            sourceCode = getURL(data['cat5Feed'])
+            feedrss(sourceCode, title)
             set_view_mode('504')
             break
 
@@ -345,12 +340,12 @@ elif mode == 'GS':
     # searches the select folder name
     for cat5Folders, data in cat5Shows.iteritems():
         if data['cat5Folder'] == foldername:
-            sourcecode = getURL(data['cat5Feed'])
-            seasons = seasonrss(sourcecode)
+            sourceCode = getURL(data['cat5Feed'])
+            seasons = seasonrss(sourceCode)
             xbmcplugin.setContent(int(sys.argv[1]), 'shows')
             xbmcplugin.addSortMethod(int(sys.argv[1]),xbmcplugin.SORT_METHOD_EPISODE)
-            for x in range (int(seasons), 0, -1):
-                addfolders(data['cat5Folder'], "Season %s" % str(x), getLastEpisodeImage(sourcecode, str(x)), data['cat5Quality'], quality, 'FS')
+            for x in seasons:
+                addfolders(data['cat5Folder'], "Season %s" % str(x), getLastEpisodeImage(sourceCode, str(x)), data['cat5Quality'], quality, 'FS')
             set_view_mode('500')
             xbmcplugin.endOfDirectory(int(sys.argv[1]))
             break
