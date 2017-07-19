@@ -1,3 +1,7 @@
+Version 1.0.18:
+- Make changelog easier to read
+- Don't list empty seasons
+
 Version 1.0.17:
 -Add Swedish, Danish and German translations
 
