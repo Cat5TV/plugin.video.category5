@@ -2,7 +2,7 @@
 <addon
     id="plugin.video.category5"
     name="Category5.TV"
-    version="1.1.0"
+    version="1.1.1"
     provider-name="Category5 TV Network">
     <requires>
         <import addon="xbmc.python" version="2.1.0" />
@@ -31,6 +31,6 @@
         <website>https://category5.tv</website>
         <source>https://github.com/Cat5TV/plugin.video.category5</source>
         <platform>all</platform>
-        <language>no en</language>
+        <language>no da sv de en</language>
     </extension>
 </addon>
