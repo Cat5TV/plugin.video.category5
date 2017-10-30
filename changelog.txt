@@ -1,3 +1,6 @@
+Version 1.1.2:
+- Add Hebrew translation
+
 Version 1.1.1:
 - Actually enable Swedish, Danish and German translations
 
