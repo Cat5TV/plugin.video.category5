@@ -21,7 +21,7 @@ Category5.TV addon can be found in Videos > Video add-ons.
 
 Please visit http://www.category5.tv/
 
-Last updated : 2017-10-26
+Last updated : 2017-10-30
 
 ## Versions
 
