@@ -2,7 +2,7 @@
 <addon
     id="plugin.video.category5"
     name="Category5.TV"
-    version="1.1.1"
+    version="1.1.2"
     provider-name="Category5 TV Network">
     <requires>
         <import addon="xbmc.python" version="2.1.0" />
@@ -17,6 +17,7 @@
         <summary lang="da">Category5 TV Network Kodi-tillegg</summary>
         <summary lang="sv">Category5 TV Network Kodi-Tillägg</summary>
         <summary lang="de">Category5 TV Network Kodi-plugin</summary>
+        <summary lang="iw">Category5 TV Network Kodi-plugin</summary>
         <description lang="en">Watch shows from the Category5 TV Network, including Category5 Technology TV.</description>
         <disclaimer lang="en">Please visit https://category5.tv/ for more information.</disclaimer>
         <description lang="no">Se programmer fra Category5 TV-nettverket, inkludert Category5 Technology TV.</description>
@@ -27,10 +28,12 @@
 	<disclaimer lang="sv">Besök https://category5.tv/ för mer information.</disclaimer>
         <description lang="de">Beobachtungen von der Kategorie5 TV-Netzwerk, einschließlich Kategorie 5 Technologie TV.</description>
 	<disclaimer lang="de">Besuchen Sie https://category5.tv/ für weitere Informationen.</disclaimer>
+        <description lang="iw">צפה בתוכניות מתוך 5 רשת טלוויזיה, כולל 5 טכנולוגיה טלוויזיה.</description>
+        <disclaimer lang="iw">בקר בכתובת https://category5.tv/ לקבלת מידע נוסף.</disclaimer>
         <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
         <website>https://category5.tv</website>
         <source>https://github.com/Cat5TV/plugin.video.category5</source>
         <platform>all</platform>
-        <language>no da sv de en</language>
+        <language>no da sv de iw en</language>
     </extension>
 </addon>
