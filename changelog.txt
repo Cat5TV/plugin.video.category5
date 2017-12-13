@@ -1,3 +1,6 @@
+Version 1.1.3:
+- Convert translations from .xml to .po files
+
 Version 1.1.2:
 - Add Hebrew translation
 
