@@ -1,0 +1,3 @@
+To add a new language, create the language folder (I.e. German/, French/ etc.)
+Run "msginit -i English/strings.po". That will procduce an XX.po file, where XX is the Locale language of your system.
+Move that file into your language folder, and name the file strings.po. For french it will be "mv fr.po French/strings.po"
