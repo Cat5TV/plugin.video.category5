@@ -3,6 +3,10 @@ Category5.TV addon Offical Development for Kodi (version 1.1.3).
 
 Watch all the episodes from the Category5 TV Network at your leisure, as well as the weekly live episodes of Category5 Technology TV.
 
+## Branches
+* the "master" branch is only compatible with Kody 16.0 (Jarvis) and above.
+* the "legacy" branch is for older versions of Kodi.
+
 ## Thanks
 This Kodi Add-On was originally developed by NateUK. Huge thanks to him for all the work that went into getting this off the ground.
 
