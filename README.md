@@ -1,5 +1,5 @@
 # plugin.video.category5
-Category5.TV addon Offical Development for Kodi (version 1.1.3).
+Category5.TV addon Offical Development for Kodi (version 1.1.4).
 
 Watch all the episodes from the Category5 TV Network at your leisure, as well as the weekly live episodes of Category5 Technology TV.
 
@@ -25,7 +25,7 @@ Category5.TV addon can be found in Videos > Video add-ons.
 
 Please visit http://www.category5.tv/
 
-Last updated : 2017-12-13
+Last updated : 2018-01-08
 
 ## Versions
 
