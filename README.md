@@ -13,7 +13,7 @@ This Kodi Add-On was originally developed by @nateuk (circa 2015). Huge thanks t
 ## Install this script
 Install the Category5 TV script:
 
-* Downloading [https://github.com/Cat5TV/plugin.video.category5/archive/master.zip](the ZIP FILE) from this page
+* Downloading [the ZIP FILE](https://github.com/Cat5TV/plugin.video.category5/archive/master.zip) from this page
 (make sure you put it somewhere you can find it later),
 * Load Kodi and go to system and find "Add-Ons" on the left hand side,
 * Click "Install from zip file".
