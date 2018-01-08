@@ -167,7 +167,7 @@ def liveshows(showurl):
 
 def feedrss(sourceCode, seasons):
     
-    xbmcplugin.setContent(int(sys.argv[1]), 'shows')
+    xbmcplugin.setContent(int(sys.argv[1]), 'tvshows')
     xbmcplugin.addSortMethod(int(sys.argv[1]),xbmcplugin.SORT_METHOD_EPISODE)
 
     # removes all new lines or character returns from the source code
@@ -293,7 +293,7 @@ mode = p('mode',None)
 # checks mode variable to see which state it is set to
 if mode == None:
     
-    xbmcplugin.setContent(int(sys.argv[1]), 'shows')
+    xbmcplugin.setContent(int(sys.argv[1]), 'tvshows')
     xbmcplugin.addSortMethod(int(sys.argv[1]),xbmcplugin.SORT_METHOD_EPISODE)
     
     # live feed for Category5.TV
@@ -342,7 +342,7 @@ elif mode == 'GS':
         if data['cat5Folder'] == foldername:
             sourceCode = getURL(data['cat5Feed'])
             seasons = seasonrss(sourceCode)
-            xbmcplugin.setContent(int(sys.argv[1]), 'shows')
+            xbmcplugin.setContent(int(sys.argv[1]), 'tvshows')
             xbmcplugin.addSortMethod(int(sys.argv[1]),xbmcplugin.SORT_METHOD_EPISODE)
             for x in seasons:
                 addfolders(data['cat5Folder'], "Season %s" % str(x), getLastEpisodeImage(sourceCode, str(x)), data['cat5Quality'], quality, 'FS')
