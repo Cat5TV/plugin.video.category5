@@ -1,6 +1,6 @@
 # plugin.video.category5
 
-[https://category5.tv](Category5.TV) Offical Add-On for Kodi (version 1.1.4).
+[Category5.TV](https://category5.tv) Offical Add-On for Kodi (version 1.1.4).
 
 Watch all available episodes from the Category5 TV Network at your leisure, as well as the weekly live episode of Category5 Technology TV.
 
@@ -8,7 +8,7 @@ This plugin is designed to function on Kodi 12+. It has been tested and is worki
 
 ## Install or Update This Add-On via ZIP File
 
-* Download [the ZIP FILE](https://github.com/Cat5TV/plugin.video.category5/archive/master.zip) from [https://github.com/Cat5TV/plugin.video.category5](our official Github repository),
+* Download [the ZIP FILE](https://github.com/Cat5TV/plugin.video.category5/archive/master.zip) from [our official Github repository](https://github.com/Cat5TV/plugin.video.category5),
 * Load Kodi and go to system and find "Add-Ons" on the left hand side,
 * Click "Install from zip file".
 * If required, authorize the use of third-party add-ons.
