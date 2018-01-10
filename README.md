@@ -23,6 +23,15 @@ Please visit https://category5.tv/
 
 Last updated : 2018-01-08
 
+## Settings
+
+* Language - see [the language folder](https://github.com/Cat5TV/plugin.video.category5/tree/master/resources/language) for list of currently supported languages.
+* Quality:
+  * Auto (default) - HLS / adaptive bitrate, will automatically change based on your available bandwidth
+  * HD - High Def, 1080p or 720p (depending on show)
+  * SD - Standard Dev, 360p
+  * Audio - MP3 streaming audio only, no video
+
 ## Versions
 
 Official release : https://github.com/Cat5TV/plugin.video.category5
